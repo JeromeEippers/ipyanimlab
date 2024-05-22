@@ -30,7 +30,7 @@ dependencies = [
 	"ipywebgl",
 	"usd-core"
 ]
-version = "1.0.0"
+version = "1.0.1"
 
 [project.urls]
 Homepage = "https://github.com/JeromeEippers/ipywebgl"
