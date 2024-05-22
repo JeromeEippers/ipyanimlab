@@ -31,6 +31,10 @@ Direct interaction with widgets in your jupyter notebook
 <img src="docs/images/screen_002.png"/><br>
 </p>
 
+## Examples
+
+You can find examples that uses this library in the [AnimationTech](https://github.com/JeromeEippers/AnimationTech) repository.
+
 ## Installation
 
 You can install using `pip`:
