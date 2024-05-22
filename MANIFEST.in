@@ -1,13 +1,7 @@
 include LICENSE.txt
 include README.md
 
-include setup.py
 include pyproject.toml
-
-include tsconfig.json
-include package.json
-include webpack.config.js
-include ipywebgl/labextension/*.tgz
 
 # Documentation
 graft docs
@@ -18,14 +12,6 @@ prune docs/dist
 
 # Examples
 graft examples
-
-# Javascript files
-graft ipywebgl/nbextension
-graft src
-graft css
-prune **/node_modules
-prune coverage
-prune lib
 
 # Patterns to exclude from any directory
 global-exclude *~

@@ -33,5 +33,5 @@ dependencies = [
 version = "1.0.1"
 
 [project.urls]
-Homepage = "https://github.com/JeromeEippers/ipywebgl"
-Documentation = "https://ipywebgl.readthedocs.io/en/latest/index.html"
+Homepage = "https://github.com/JeromeEippers/ipyanimlab"
+Documentation = "https://ipyanimlab.readthedocs.io/en/latest/index.html"
