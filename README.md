@@ -6,6 +6,7 @@
 A character animation widget for Jupyter Lab
 </p>
 
+[![Documentation Status](https://readthedocs.org/projects/ipyanimlab/badge/?version=latest)](https://ipyanimlab.readthedocs.io/en/latest/?badge=latest)
 
 ## Introduction
 
