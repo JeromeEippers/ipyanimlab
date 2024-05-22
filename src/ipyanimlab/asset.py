@@ -3,6 +3,7 @@ from copy import deepcopy
 import itertools
 
 from .render.material import Material
+from . import utils
 
 class Asset:
     """An asset in the viewer that can be rendered.
@@ -217,9 +218,18 @@ class Asset:
             :parent_name: (str, optional): the name of the parent bone. Defaults to None.
             :global_space: (bool, optional): is the quaternion and position in localspace or worldspace. Defaults to True.
         """
-        self._mesh.add_bone(name, q, p, parent_name, global_space)
+        matrix = utils.quat_to_mat(q, p)
+        parent_id = -1
+        if parent_name in self.bone_names():
+            parent_id = self.bone_names().index(parent_name)
+            
+        if parent_id > -1 and global_space:
+            self.world_skeleton_xforms()
+            matrix = np.dot(np.linalg.inv(self._scratch_skeleton_[parent_id, :, :]), matrix)
+
+        self._mesh.add_bone(name, parent_id, matrix)
         self._skeleton_xforms = np.zeros_like(self._mesh.initialpose, dtype=np.float32)
-        self._skeleton_xforms[:,:,:] = self._compute_local_to_global()
+        self._skeleton_xforms[:,:,:] = self._compute_skeleton_xforms()
 
     def _compute_skeleton_xforms(self, local_matrices=None, names=None):
         if local_matrices is not None:

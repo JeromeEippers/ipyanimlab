@@ -76,24 +76,19 @@ class Mesh:
         return self.bone_names.index(name)
 
 
-    def add_bone(self, name, q, p, parent_name=None, global_space=True):
+    def add_bone(self, name, parent_id, matrix):
         if name in self.bone_names:
             raise Exception(name + " already in skeleton")
 
-        m = utils.quat_to_mat(q, p)
-        parent_id = -1
-        if parent_name in self.bone_names:
-            parent_id = self.bone_names.index(parent_name)
-            
-        if parent_id > -1 and global_space:
-            self.global_bones()
-            m = np.dot(np.linalg.inv(self.scratch_buffer[parent_id, :, :]), m)
-
-        self.bone_names.append(name)
         self.bone_names.append(name)
         self.bone_parents = np.append(self.bone_parents, parent_id)
         initial = np.zeros([self.bone_count(), 4, 4], dtype=np.float32)
         initial[:self.bone_count()-1,:, :] = self.initialpose
-        initial[-1, :, :] = m
+        initial[-1, :, :] = matrix
         self.initialpose = initial
+        
+        initial = np.zeros([self.bone_count(), 4, 4], dtype=np.float32)
+        initial[:self.bone_count()-1,:, :] = self.bindpose
+        initial[-1, :, :] = matrix
+        self.bindpose = initial
     
