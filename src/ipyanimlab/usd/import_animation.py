@@ -53,7 +53,7 @@ def import_usd_animation(filepath, anim_mapper=None):
     Returns:
         :Anim: the animation
     """
-    stage = Usd.Stage.Open('example_animation.usd')
+    stage = Usd.Stage.Open(filepath)
     anim = read_usd_animation(stage)
 
     if anim_mapper is not None:
