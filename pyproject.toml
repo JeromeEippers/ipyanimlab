@@ -30,7 +30,7 @@ dependencies = [
 	"ipywebgl",
 	"usd-core"
 ]
-version = "1.0.2"
+version = "1.0.3"
 
 [project.urls]
 Homepage = "https://github.com/JeromeEippers/ipyanimlab"
