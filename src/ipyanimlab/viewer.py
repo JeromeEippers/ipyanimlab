@@ -19,6 +19,7 @@ from .render import axis
 from .render import line
 from . import procedural_asset
 from .usd.import_asset import import_usd_asset
+from .fbxreader import import_fbx_asset
 from .asset import Asset
 from . import assets
 
@@ -230,6 +231,26 @@ class Viewer(ipywebgl.GLViewer):
         if not os.path.exists(path):
             raise Exception(f"{path} not found")
         return import_usd_asset(self, path)
+
+
+    def import_fbx_asset(self, path, read_material=True):
+        """Import an fbx file as an asset.
+        The asset can be a rigid asset or a skeletal asset
+
+        if the path is not found, we will try to load the asset from the internal 'assets' folder
+
+        Args:
+            :path: (string): the path to the fbx file
+            :read_material: (bool): do we use the materials colors. Defaults : True
+
+        Returns:
+            :Asset: the loaded asset
+        """
+        if not os.path.exists(path):
+            path = assets.get_asset_path(path)
+        if not os.path.exists(path):
+            raise Exception(f"{path} not found")
+        return import_fbx_asset(self, path, read_material)
 
 
     def begin_shadow(self):
