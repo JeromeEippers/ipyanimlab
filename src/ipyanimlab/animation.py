@@ -77,7 +77,7 @@ def remap_animation_to_asset(anim, asset, keep_translation=False):
         if name in asset._mesh.bone_names:
             bone_id = asset._mesh.bone_names.index(name)
             quats[:, bone_id, :] = rotations[:, i, :]
-            if i <= 1 or keep_translation:
+            if i <= 0 or keep_translation:
                 pos[:, bone_id, :] = positions[:, i, :]
 
     return Anim(quats, pos, pos[0], asset._mesh.bone_parents, asset._mesh.bone_names)
